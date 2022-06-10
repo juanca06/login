@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>Parsear o leer JSON con jQuery - EjemploCodigo</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lumen/bootstrap.min.css" integrity="sha384-GzaBcW6yPIfhF+6VpKMjxbTx6tvR/yRd/yJub90CqoIn2Tz4rRXlSpTFYMKHCifX" crossorigin="anonymous">
+
+<link rel="stylesheet" href="cssestilo.css">
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" ></script> 
+	
+</head>
+
+
+<body class="align-items-center">
+
+	<style>
+		footer {/*Footer de la pagina*/ 
+		background: #E5E8E8;/*Color de la pagina */
+		color: black;
+		font-size: 12px;
+		padding: 20px 0;
+		text-align: center;
+		padding-bottom: 20px;
+		
+	}
+	body{
+		background-color: #E0FBFF;
+		padding-top: 35px;
+	}
+	
+	footer {
+		display: block;
+	}
+	</style>
+ 
+
+
+        <!-- Cabecera -->
+	<div class="container col-auto">
+        <div>
+			<center>
+				<h1>Datos del Personal</h1><br>
+			</center>
+            
+		</div>
+
+        <!-- Contenido -->
+        <section>
+            
+
+			<table class="table" id="tablajson">
+			<thead class="">
+			<th scope="col">Nombre</th>
+			<th scope="col">Apellido</th>
+			<th scope="col">Fecha de Contrato</th>
+			<th scope="col">Correo</th>
+			<th scope="col">Direccion</th>
+			<th scope="col">ID del Empleado</th>			
+			</thead>
+			<tbody></tbody>
+			</table>
+			<center>
+				<a href="frame.php" type="button" class="btn btn-info">Regresar</a>
+				<a href="mostrar.html" type="button" class="btn btn-info">Datos</a>
+			</center>
+
+			<script type="text/javascript">
+
+			$(document).ready(function(){
+			var url="generarJSON2.php";
+			$("#tablajson tbody").html("");
+			$.getJSON(url,function(empleado){
+			$.each(empleado, function(i,empleado){
+			var newRow =
+			"<tr>"
+			+"<td>"+empleado.nombre+"</td>"
+			+"<td>"+empleado.apellido+"</td>"
+			+"<td>"+empleado.fechacontrat+"</td>"
+			+"<td>"+empleado.correo+"</td>"
+			+"<td>"+empleado.direccion+"</td>"
+			+"<td>"+empleado.IDempleado+"</td>"
+			+"</tr>";
+			$(newRow).appendTo("#tablajson tbody");
+			});
+			});
+			});
+
+			</script>
+
+ 
+        </section>
+
+	</div>
+
+</body>
+<br> <br><br><br> <br> <br><br><br><br> <br><br><br><br><br><br><br>
+<footer class="footer">
+        <h6>© Copyright 2021. Hecho por Juan Carlos Ruperto Zarate</h6>
+</footer>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=divice-width, initial-scale=1"/>
+<title>Parsear o leer JSON con jQuery - EjemploCodigo</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lumen/bootstrap.min.css" integrity="sha384-GzaBcW6yPIfhF+6VpKMjxbTx6tvR/yRd/yJub90CqoIn2Tz4rRXlSpTFYMKHCifX" crossorigin="anonymous">
+
+<link rel="stylesheet" href="cssestilo.css">
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" ></script> 
+	
+</head>
+
+
+<body class="  align-items-center "></body>
+ 
+<style>
+	footer {/*Footer de la pagina*/ 
+    background: #E5E8E8;/*Color de la pagina */
+    color: black; /*Color de letras*/
+    font-size: 12px;
+    padding: 20px 0;
+    text-align: center;
+    padding-bottom: 20px;
+	
+}
+body{
+	background-color: #E0FBFF; /* Color de Fondo*/
+	padding-top: 35px;
+}
+
+footer {
+    display: block;
+}
+</style>
+
+
+        <!-- Cabecera -->
+	<div class="container col-auto">
+        <div>
+			<center>
+				<h1>Peliculas</h1><br><!--Titulo-->
+			</center>
+            
+		</div>
+
+        <!-- Contenido -->
+        <section class="table-responsive">
+			<!--Tabla en en html que muestra la pagina-->
+			<table class="table" id="tablajson">
+			<thead class="">
+			<th scope="col">Id de venta</th>
+			<th scope="col">Pelicula</th>
+			<th scope="col">Descripcion</th>
+			<th scope="col">Boletos</th>
+			<th scope="col">Precio</th>			
+			<th scope="col">Empleado</th>
+			<th scope="col"></th> <!--Columna de los Colores-->
+			</thead>
+			<tbody></tbody>
+			</table>
+			
+			<center>
+				<a href="frame.php" type="button" class="btn btn-info">Inicio</a>
+				<a href="mostrar2.html" type="button" class="btn btn-info">Empleado</a>
+			</center>
+			
+	<script type="text/javascript">
+		//funcion para la tabla 
+		$(document).ready(function(){
+			var url="generarJSON.php";
+			/**/var ca;
+			var cantidad;
+
+			function si(cantidad) {
+				if (cantidad >= 0 && cantidad <= 130){
+					ca = "Insuficiente"
+				}
+
+				else {
+					if (cantidad >= 131 && cantidad <= 180) {
+						ca= "Suficiente"
+					} 
+				}
+			return ca;/**/
+			}
+
+		$("#tablajson tbody").html(""); //tabla generado con json con los datos agregados a la base de datos
+		$.getJSON(url,function(venta){
+		$.each(venta, function(i,venta){
+			var newRow =
+				"<tr>"
+				+"<td>"+venta.IDventa+"</td>"
+				+"<td>"+venta.pelicula+"</td>"
+				+"<td>"+venta.descripcion+"</td>"
+				+"<td>"+venta.cantidad+"</td>"
+				+"<td>"+venta.precio+"</td>"
+				+"<td>"+venta.IDempleado+"</td>"
+				+"<td>"+ si(venta.cantidad)+"</td>"
+				+"</tr>";
+				$(newRow).appendTo("#tablajson tbody");
+				});
+		/**/		$(function () {
+			$("table td:last-child:contains(Suficiente)") //Colores siguiendo la funcion hecho
+				.css("background-color", "#98FFA1")  //verde
+				.css("color", "black");
+				
+			$("table td:last-child:contains(Insuficiente)")
+				.css("background-color", "#FFA698") //rojo
+				.css("color", "black");
+				
+			});/**/
+			});
+		});
+
+
+			</script>
+ 
+        </section>
+		
+	</div>
+</body>
+
+<body>
+	
+</body>
+<br><br><br>
+<footer class="footer">   
+	<h6>© Copyright 2021. Hecho por Juan Carlos Ruperto Zarate</h6>
+</footer>
+
+</html>
